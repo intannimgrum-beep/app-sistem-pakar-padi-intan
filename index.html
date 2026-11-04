@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sistem Pakar Diagnosis Penyakit Tanaman Padi</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="brand"><span class="logo">🌾</span><div><b>Pakar Padi</b><small>Forward Chaining · UTS Sistem Pakar</small></div></div>
+  <nav>
+    <button data-v="konsul" class="on" onclick="lihat('konsul')">Konsultasi</button>
+    <button data-v="gal" onclick="lihat('gal')">Galeri Penyakit</button>
+    <button data-v="kb" onclick="lihat('kb')">Basis Pengetahuan</button>
+    <button data-v="uji" onclick="lihat('uji')">Pengujian</button>
+    <button data-v="dok" onclick="lihat('dok')">Dokumen</button>
+    <button data-v="info" onclick="lihat('info')">Tentang</button>
+  </nav>
+</header>
+<main>
+<div class="view" id="v-konsul">
+  <section id="s-intro" class="card hero">
+    <div class="herotxt">
+      <h1>Padi Anda sakit?</h1>
+      <p>Jawab 16 pertanyaan tentang gejala di daun, pelepah, malai, dan lahan. Sistem menelusuri aturan JIKA-MAKA, lalu menampilkan dugaan penyakit, penyebab, saran pengendalian, dan aturan yang dipakai.</p>
+      <div class="stats"><span><b>16</b>gejala</span><span><b>7</b>penyakit</span><span><b>21</b>aturan</span></div>
+      <div class="note">Ini diagnosis awal. Untuk dosis dan jenis pestisida, ikuti anjuran penyuluh pertanian dan label produk.</div>
+      <div class="grid2">
+        <label>Nama Anda (opsional)<input id="nama" maxlength="40" placeholder="mis. Pak Slamet"></label>
+        <label>Lokasi/varietas (opsional)<input id="merek" maxlength="40" placeholder="mis. Sawah Metro, Ciherang"></label>
+      </div>
+      <button class="btn" onclick="mulai()">Mulai konsultasi</button>
+    </div>
+    <div class="heroimg" id="hero"></div>
+  </section>
+
+  <section id="s-tanya" class="card hidden">
+    <div class="progress"><div id="bar"></div></div>
+    <p class="mute" id="no"></p>
+    <span class="chip" id="kat"></span>
+    <h2 id="soal"></h2>
+    <div class="pilihan">
+      <button id="b-ya" class="opt" onclick="pilih(true)">✓ Ya</button>
+      <button id="b-tidak" class="opt" onclick="pilih(false)">✗ Tidak</button>
+    </div>
+    <p id="galat" class="galat" role="alert"></p>
+    <div class="aksi">
+      <button class="btn ghost" id="back" onclick="mundur()">Kembali</button>
+      <button class="btn" id="next" onclick="lanjut()">Lanjut</button>
+      <button class="btn ghost" onclick="ulang()">Batal</button>
+    </div>
+  </section>
+
+  <section id="s-hasil" class="hidden">
+    <p class="mute" id="sapa"></p>
+    <h1>Hasil diagnosis</h1>
+    <div id="out"></div>
+    <div class="card"><h3>Gejala yang Anda jawab "Ya"</h3><div id="gejala"></div></div>
+    <div class="card"><h3>Graf penalaran</h3><div id="graf"></div></div>
+    <div class="card"><h3>Fasilitas penjelasan: aturan yang dijalankan</h3><div id="jejak"></div></div>
+    <div class="card"><h3>Jejak iterasi Forward Chaining</h3><div id="iter"></div></div>
+    <div class="aksi">
+      <button class="btn" onclick="ulang()">Konsultasi ulang</button>
+      <button class="btn ghost" onclick="window.print()">Cetak hasil</button>
+    </div>
+  </section>
+</div>
+<div class="view hidden" id="v-gal"><h1>Galeri Penyakit Padi</h1><p class="mute">Ilustrasi. Letakkan foto asli di folder <code>img/</code> dengan nama <code>D1.jpg</code> sampai <code>D7.jpg</code>, otomatis menggantikan ilustrasi.</p><div id="gal"></div></div>
+<div class="view hidden" id="v-kb"><h1>Basis Pengetahuan</h1><div id="kb"></div></div>
+<div class="view hidden" id="v-uji"><h1>Pengujian Sistem</h1><div id="uji"></div></div>
+<div class="view hidden" id="v-dok"><h1>Dokumen Pendukung Laporan</h1><div id="dok"></div></div>
+<div class="view hidden" id="v-info"><h1>Tentang Sistem</h1><div id="info"></div></div>
+</main>
+<footer id="foot"></footer>
+<script src="js/knowledge.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ilustrasi.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
